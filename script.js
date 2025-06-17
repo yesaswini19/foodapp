@@ -1,220 +1,172 @@
-// Mobile Menu Toggle
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
+// Enhanced meal database with detailed cooking instructions
+const meals = {
+    quick: [
+        { 
+            name: "Avocado Toast", 
+            ingredients: [
+                "2 slices whole grain bread",
+                "1 ripe avocado",
+                "1/2 lemon (juiced)",
+                "Salt and pepper to taste",
+                "Red pepper flakes (optional)",
+                "1 tbsp olive oil"
+            ],
+            time: 5,
+            image: "quickbites-simple\images\avocado-toast.jpg",
+            instructions: [
+                "Toast the bread until golden and crisp",
+                "Cut the avocado in half, remove the pit, and scoop the flesh into a bowl",
+                "Mash the avocado with lemon juice, salt, and pepper",
+                "Spread the avocado mixture evenly on the toast",
+                "Drizzle with olive oil and sprinkle with red pepper flakes if desired",
+                "Serve immediately"
+            ]
+        },
+        { 
+            name: "Microwave Scrambled Eggs", 
+            ingredients: [
+                "2 large eggs",
+                "1 tbsp milk or water",
+                "1 tsp butter",
+                "Salt and pepper to taste",
+                "Chopped chives or parsley for garnish"
+            ],
+            time: 7,
+            image: "quickbites-simple\images\scrambled-eggs.jpeg",
+            instructions: [
+                "Coat a microwave-safe bowl with butter",
+                "In the bowl, whisk together eggs, milk, salt, and pepper",
+                "Microwave on high for 45 seconds, then stir",
+                "Continue microwaving in 15-second intervals, stirring between each, until eggs are softly set (about 2 minutes total)",
+                "Let stand for 1 minute before serving",
+                "Garnish with fresh herbs if desired"
+            ]
+        }
+    ],
+    medium: [
+        { 
+            name: "Vegetable Stir Fry", 
+            ingredients: [
+                "1 cup mixed bell peppers (sliced)",
+                "1 cup broccoli florets",
+                "1 carrot (julienned)",
+                "2 cloves garlic (minced)",
+                "1 tbsp ginger (grated)",
+                "2 tbsp soy sauce",
+                "1 tbsp sesame oil",
+                "1 tbsp vegetable oil",
+                "1 tsp cornstarch (optional)",
+                "Cooked rice for serving"
+            ],
+            time: 15,
+            image: "quickbites-simple\images\stir-fry.jpeg",
+            instructions: [
+                "Heat vegetable oil in a wok or large skillet over high heat",
+                "Add garlic and ginger, stir for 15 seconds until fragrant",
+                "Add carrots and stir-fry for 1 minute",
+                "Add broccoli and bell peppers, stir-fry for 2-3 minutes until crisp-tender",
+                "In a small bowl, mix soy sauce with sesame oil and cornstarch (if using)",
+                "Pour sauce over vegetables and toss to coat",
+                "Cook for 1 more minute until sauce thickens slightly",
+                "Serve immediately over cooked rice"
+            ]
+        },
+        { 
+            name: "Pasta Aglio e Olio", 
+            ingredients: [
+                "8 oz spaghetti or linguine",
+                "4 cloves garlic (thinly sliced)",
+                "1/2 cup extra virgin olive oil",
+                "1 tsp red pepper flakes",
+                "1/4 cup fresh parsley (chopped)",
+                "Salt to taste",
+                "1/2 cup pasta water",
+                "Grated Parmesan cheese (optional)"
+            ],
+            time: 20,
+            image: "quickbites-simple\images\pasta.jpg",
+            instructions: [
+                "Bring a large pot of salted water to boil",
+                "Cook pasta according to package directions (reserve 1/2 cup pasta water before draining)",
+                "While pasta cooks, heat olive oil in a large pan over medium heat",
+                "Add garlic slices and cook until golden (about 2 minutes), stirring frequently",
+                "Add red pepper flakes and cook for 30 seconds more",
+                "Add drained pasta to the pan along with 1/4 cup pasta water",
+                "Toss to coat, adding more pasta water as needed to create a light sauce",
+                "Stir in chopped parsley and season with salt",
+                "Serve with grated Parmesan if desired"
+            ]
+        }
+    ]
+};
 
-hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    hamburger.classList.toggle('active');
-});
-
-// Close menu when clicking a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
-    });
-});
-
-// Smooth Scrolling for all links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-// Recipe Database
-const recipes = [
-    {
-        id: 1,
-        name: "Avocado Toast with Egg",
-        time: 5,
-        image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-        ingredients: [
-            "1 slice whole grain bread",
-            "1/2 ripe avocado",
-            "1 egg",
-            "1 tsp lemon juice",
-            "Pinch of red pepper flakes",
-            "Salt and pepper to taste"
-        ],
-        procedure: [
-            "Toast the bread until golden and crisp",
-            "Meanwhile, mash the avocado with lemon juice, salt, and pepper",
-            "Fry or poach the egg to your liking",
-            "Spread the mashed avocado on toast, top with the egg",
-            "Sprinkle with red pepper flakes and enjoy!"
-        ]
-    },
-    {
-        id: 2,
-        name: "Greek Yogurt Parfait",
-        time: 3,
-        image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-        ingredients: [
-            "1 cup Greek yogurt",
-            "1/2 cup granola",
-            "1/2 cup mixed berries (fresh or frozen)",
-            "1 tbsp honey",
-            "1 tbsp chia seeds (optional)"
-        ],
-        procedure: [
-            "In a bowl or glass, layer half the yogurt",
-            "Add a layer of granola and berries",
-            "Repeat with remaining yogurt and toppings",
-            "Drizzle with honey and sprinkle chia seeds",
-            "Enjoy immediately or refrigerate for up to 2 hours"
-        ]
-    },
-    {
-        id: 3,
-        name: "Microwave Omelette",
-        time: 5,
-        image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-        ingredients: [
-            "2 eggs",
-            "2 tbsp milk",
-            "1/4 cup shredded cheese",
-            "1/4 cup diced vegetables (bell pepper, onion, spinach)",
-            "Salt and pepper to taste"
-        ],
-        procedure: [
-            "Whisk eggs and milk in a microwave-safe bowl",
-            "Add vegetables, cheese, and seasonings",
-            "Microwave on high for 1 minute, stir",
-            "Microwave for another 1-2 minutes until set",
-            "Let stand 1 minute before serving"
-        ]
-    },
-    {
-        id: 4,
-        name: "15-Minute Stir Fry",
-        time: 15,
-        image: "https://images.unsplash.com/photo-1607602132700-0681204691c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-        ingredients: [
-            "1 cup pre-cut stir-fry vegetables",
-            "1 chicken breast, sliced thin",
-            "2 tbsp stir-fry sauce",
-            "1 cup cooked rice",
-            "1 tbsp oil",
-            "1 clove garlic, minced"
-        ],
-        procedure: [
-            "Heat oil in a pan over high heat",
-            "Add chicken and cook until no longer pink (5-6 mins)",
-            "Add garlic and vegetables, cook 3-4 minutes",
-            "Stir in sauce and cook 1 more minute",
-            "Serve over rice"
-        ]
-    },
-    {
-        id: 5,
-        name: "30-Minute Sheet Pan Dinner",
-        time: 30,
-        image: "https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-        ingredients: [
-            "2 chicken thighs",
-            "1 cup baby potatoes, halved",
-            "1 cup broccoli florets",
-            "2 tbsp olive oil",
-            "1 tsp garlic powder",
-            "1 tsp paprika",
-            "Salt and pepper to taste"
-        ],
-        procedure: [
-            "Preheat oven to 400°F (200°C)",
-            "Toss potatoes with 1 tbsp oil and seasonings, roast for 15 mins",
-            "Add chicken and broccoli with remaining oil",
-            "Roast for another 15 minutes until chicken is cooked",
-            "Serve immediately"
-        ]
-    }
-];
-
-// Time Slider Functionality
+// DOM elements
 const timeSlider = document.getElementById('timeSlider');
-const selectedTime = document.getElementById('selectedTime');
-const generateBtn = document.getElementById('generateRecipes');
-const recipeDisplay = document.getElementById('recipeDisplay');
+const timeValue = document.getElementById('timeValue');
+const generateBtn = document.getElementById('generateBtn');
+const mealName = document.getElementById('mealName');
+const mealImage = document.getElementById('mealImage');
+const mealTime = document.getElementById('mealTime');
+const ingredientsList = document.getElementById('ingredientsList');
+const instructionsList = document.getElementById('instructionsList');
 
-timeSlider.addEventListener('input', function() {
-    selectedTime.textContent = this.value;
-});
-
-// Generate Recipes Based on Selected Time
-generateBtn.addEventListener('click', function() {
+// Generate meal based on selected time
+function generateMeal() {
     const selectedTime = parseInt(timeSlider.value);
-    const matchingRecipes = recipes.filter(recipe => recipe.time <= selectedTime);
     
-    if (matchingRecipes.length === 0) {
-        recipeDisplay.innerHTML = `
-            <div class="placeholder">
-                <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="No recipes found">
-                <h3>No recipes found for ${selectedTime} minutes</h3>
-                <p>Try increasing your time budget or check our meal plans for more options</p>
-            </div>
-        `;
-        return;
+    // Filter meals that match the selected time category
+    let mealPool;
+    if (selectedTime <= 10) {
+        mealPool = meals.quick.filter(meal => meal.time <= selectedTime);
+        // If no quick meals match, include the fastest medium meals
+        if (mealPool.length === 0) {
+            mealPool = [...meals.quick, ...meals.medium.filter(meal => meal.time <= 15)];
+        }
+    } else {
+        mealPool = [...meals.quick, ...meals.medium.filter(meal => meal.time <= selectedTime)];
     }
     
-    recipeDisplay.innerHTML = matchingRecipes.map(recipe => `
-        <div class="recipe-card">
-            <div class="recipe-image" style="background-image: url('${recipe.image}')">
-                <span class="time-badge">${recipe.time} mins</span>
-            </div>
-            <div class="recipe-details">
-                <h3>${recipe.name}</h3>
-                
-                <div class="ingredients">
-                    <h4><i class="fas fa-shopping-basket"></i> Ingredients</h4>
-                    <ul class="ingredients-list">
-                        ${recipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
-                    </ul>
-                </div>
-                
-                <div class="procedure">
-                    <h4><i class="fas fa-list-ol"></i> Instructions</h4>
-                    <ol class="procedure-list">
-                        ${recipe.procedure.map(step => `<li>${step}</li>`).join('')}
-                    </ol>
-                </div>
-            </div>
-        </div>
-    `).join('');
+    // If still no meals, use all meals
+    if (mealPool.length === 0) mealPool = [...meals.quick, ...meals.medium];
     
-    // Animate recipe cards
-    const cards = document.querySelectorAll('.recipe-card');
-    cards.forEach((card, index) => {
-        setTimeout(() => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.animation = 'fadeInUp 0.5s ease forwards';
-            card.style.animationDelay = `${index * 0.1}s`;
-            card.classList.add('show');
-        }, 100);
+    // Select random meal
+    const randomMeal = mealPool[Math.floor(Math.random() * mealPool.length)];
+    
+    // Update display
+    displayMeal(randomMeal);
+}
+
+// Display the selected meal
+function displayMeal(meal) {
+    mealName.textContent = meal.name;
+    mealImage.src = meal.image;
+    mealTime.textContent = `${meal.time} min`;
+    
+    // Update ingredients
+    ingredientsList.innerHTML = '';
+    meal.ingredients.forEach(ingredient => {
+        const li = document.createElement('li');
+        li.textContent = ingredient;
+        ingredientsList.appendChild(li);
     });
+    
+    // Update instructions with step numbers
+    instructionsList.innerHTML = '';
+    meal.instructions.forEach((step, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span class="step-number">${index + 1}.</span> ${step}`;
+        instructionsList.appendChild(li);
+    });
+}
+
+// Initialize time slider
+timeSlider.addEventListener('input', function() {
+    timeValue.textContent = this.value;
+    generateMeal();
 });
 
-// Initialize with some recipes
-window.addEventListener('DOMContentLoaded', () => {
-    timeSlider.value = 15;
-    selectedTime.textContent = 15;
-    generateBtn.click();
-});function generateShoppingList(planId) {
-    const plan = mealPlans[planId];
-    const allIngredients = [];
-    
-    plan.days.forEach(day => {
-        day.meals.forEach(meal => {
-            meal.ingredients.forEach(ing => {
-                if (!allIngredients.includes(ing)) {
-                    allIngredients.push(ing);
-                }
-            });
-        });
-    });
-    
-    return allIngredients;
-}
+// Generate first meal on load
+window.addEventListener('DOMContentLoaded', generateMeal);
+
+// Generate new meal on button click
+generateBtn.addEventListener('click', generateMeal);
